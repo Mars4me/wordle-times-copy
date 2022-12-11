@@ -1,15 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import PinInputWrapper from "./Component/PinInputWrapper";
+import { getRandomWord } from "./util/dictionary";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [correctWord, setCorrectWord] = useState(getRandomWord());
+
+  const restartGameChangeCorrectWord = () => {
+    setCorrectWord(getRandomWord());
+  };
+  console.log(correctWord);
 
   return (
     <div className="App">
-      <div>
+      <PinInputWrapper rows={6} wordSize={5} correctWord={correctWord} handleRestart={restartGameChangeCorrectWord} />
+      {/* <Field /> */}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

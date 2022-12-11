@@ -1,41 +1,115 @@
 #root {
   max-width: 1280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --color-tone-1: #d3d6da;
+  --color-tone-2: #787c7e;
+  --color-tone-4: #d3d6da;
+  --yellow: #c9b458;
+  --green: #6aaa64;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.prevent-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+input,
+textarea,
+*[contenteditable="true"] {
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
-.card {
-  padding: 2em;
+.keyboard-wrapper {
+  margin-top: 50px;
 }
 
-.read-the-docs {
-  color: #888;
+.board-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  margin: 0 auto 5px;
+}
+
+.keyboard-wrapper button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: var(--color-tone-4);
+  font-weight: bold;
+  height: 58px;
+  border: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  margin: 0 3px;
+  padding: 5px;
+  color: #242424;
+  border: 2px solid var(--color-tone-4);
+  font-size: 2rem;
+  line-height: 1;
+  text-transform: capitalize;
+  font-weight: bold;
+  text-align: center;
+}
+
+.semi-correct {
+  background-color: var(--yellow);
+  color: white;
+}
+
+.correct {
+  background-color: var(--green);
+  color: white;
+}
+
+.incorrect {
+  background-color: var(--color-tone-2);
+  color: white;
+}
+.restart-button {
+  background-color: lightcoral;
+  font-size: 20px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+.restart-button:hover {
+  color: lightcoral;
+  background-color: #222;
+  transform: scale(1.1);
+}
+
+.restart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
 }
