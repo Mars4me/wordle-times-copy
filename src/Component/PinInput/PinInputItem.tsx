@@ -15,7 +15,7 @@ const PinInputItem: FC<PinInputItemProps> = ({ value, highlight }) => {
       name="letter"
       type="text"
       disabled
-      className={`prevent-select cell ${highlight}`}
+      className={`cell ${highlight}`}
       maxLength={1}
       value={value}
     />

@@ -21,8 +21,6 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
   const handleBackspace = () => setCurrentWord((prev) => prev.slice(0, prev.length - 1));
 
   const handlePressed = (letter) => {
-    const userLang = navigator.language;
-    console.log(userLang);
     setCurrentWord((prev) => {
       if (prev.length >= wordSize) {
         return prev;
@@ -103,15 +101,25 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
     };
   }, [currentWord]);
 
-  // const letterClasses = useMemo(() => {
-  //   return completedWords.reduce(
-  //     (previousValue, currentValue) => ({
-  //       ...previousValue,
-  //       [currentValue.letter]: currentValue.variant,
-  //     }),
-  //     {}
-  //   );
-  // }, [completedWords]);
+  const letterClasses = useMemo(() => {
+    const checkLaterCoincidences = completedWords
+      .map((word) => {
+        return word.coincidences.map((e, index) => ({ [word.text[index]]: e }));
+      })
+      .flat();
+
+    const filteredCoincidences = checkLaterCoincidences.reduce((previousValue, currentValue) => {
+      if (previousValue[Object.keys(currentValue)[0]]) {
+        if (previousValue[Object.keys(currentValue)[0]] === "semi-correct" && Object.values(currentValue)[0] === "correct") {
+          return { ...previousValue, ...currentValue };
+        }
+        return { ...previousValue };
+      }
+      return { ...previousValue, ...currentValue };
+    }, {});
+
+    return filteredCoincidences;
+  }, [completedWords]);
 
   if (won) {
     return (
@@ -136,7 +144,7 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
           highlight={completedWords[index].coincidences}
         />
       ))}
-      <MemoizedKeyboard letterClasses={{}} onPressed={handlePressed} onBackspace={handleBackspace} />
+      <MemoizedKeyboard letterClasses={letterClasses} onPressed={handlePressed} onBackspace={handleBackspace} />
     </div>
   );
 };

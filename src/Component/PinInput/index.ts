@@ -1,1 +1,1 @@
-export { PinInput } from "./PinInput";
+export { MemoPinInput } from "./PinInput";

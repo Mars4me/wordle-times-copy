@@ -73,7 +73,6 @@ export const Field = () => {
 
   useEffect(() => {
     if (currentWord && currentWord.length === WORD_LENGTH) {
-      console.log(currentWord, "hasfhashfahsfhasfhashf");
       if (currentWord === correctWord) {
         setPeremoha(true);
       } else if (isProper(currentWord)) {

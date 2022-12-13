@@ -1,10 +1,9 @@
-import { memo, useEffect } from "react";
+import { memo } from "react";
 const rows = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
 
 const buttons = rows.map((row) => row.split(""));
 
 export const Keyboard = ({ onBackspace, onPressed, letterClasses }) => {
-  console.log("hello from keyboard");
   return (
     <div className="keyboard-wrapper">
       <div className="keyboard">
