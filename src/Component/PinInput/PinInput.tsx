@@ -24,7 +24,7 @@ const PinInput: FC<PinInputProps> = ({ cells, text, highlight }) => {
 };
 
 const pinInputEqualize = (prev, next) => {
-  return prev.text === next.text;
+  return prev.text === next.text && prev.highlight === next.hightlight;
 };
 
 export const MemoPinInput = memo(PinInput, pinInputEqualize);

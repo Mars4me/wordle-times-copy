@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { MemoizedKeyboard } from "../game/Keyboard";
 import { MemoPinInput } from "./PinInput/PinInput";
 import { isProper } from "./../util/dictionary";
@@ -133,6 +133,8 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
       </div>
     );
   }
+
+  useEffect(() => console.log(letterClasses), [completedWords]);
 
   return (
     <div>

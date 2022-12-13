@@ -25,7 +25,7 @@ export const Keyboard = ({ onBackspace, onPressed, letterClasses }) => {
 };
 
 function keyboardPropsAreEqual(prevKeyProps, nextKeyProps) {
-  return Object.keys(prevKeyProps.letterClasses).length === Object.keys(nextKeyProps.letterClasses).length;
+  return prevKeyProps.letterClasses === nextKeyProps.letterClasses;
 }
 
 export const MemoizedKeyboard = memo(Keyboard, keyboardPropsAreEqual);
