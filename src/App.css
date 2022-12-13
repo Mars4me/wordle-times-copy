@@ -95,3 +95,11 @@ button {
   justify-content: center;
   height: 50vh;
 }
+
+b {
+  text-transform: uppercase;
+  background-color: #242424;
+  color: #d3d6da;
+  border-radius: 10px;
+  padding: 5px;
+}

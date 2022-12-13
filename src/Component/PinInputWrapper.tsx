@@ -6,6 +6,24 @@ import { completedWordsType } from "./PinInput/types";
 
 const initializeCompleteWords = (rows) => Array(rows).fill({ text: "", coincidences: [] });
 
+const findLetterCoincidences = (array: completedWordsType[]) =>
+  array
+    .map((word) => {
+      return word.coincidences.map((e, index) => ({ [word.text[index]]: e }));
+    })
+    .flat();
+
+const filterCoincidences = (array) =>
+  array.reduce((previousValue, currentValue) => {
+    if (previousValue[Object.keys(currentValue)[0]]) {
+      if (previousValue[Object.keys(currentValue)[0]] === "semi-correct" && Object.values(currentValue)[0] === "correct") {
+        return { ...previousValue, ...currentValue };
+      }
+      return { ...previousValue };
+    }
+    return { ...previousValue, ...currentValue };
+  }, {});
+
 interface PinInputWrapperProps {
   rows: number;
   wordSize: number;
@@ -102,22 +120,8 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
   }, [currentWord]);
 
   const letterClasses = useMemo(() => {
-    const checkLaterCoincidences = completedWords
-      .map((word) => {
-        return word.coincidences.map((e, index) => ({ [word.text[index]]: e }));
-      })
-      .flat();
-
-    const filteredCoincidences = checkLaterCoincidences.reduce((previousValue, currentValue) => {
-      if (previousValue[Object.keys(currentValue)[0]]) {
-        if (previousValue[Object.keys(currentValue)[0]] === "semi-correct" && Object.values(currentValue)[0] === "correct") {
-          return { ...previousValue, ...currentValue };
-        }
-        return { ...previousValue };
-      }
-      return { ...previousValue, ...currentValue };
-    }, {});
-
+    const checkLetterCoincidences = findLetterCoincidences(completedWords);
+    const filteredCoincidences = filterCoincidences(checkLetterCoincidences);
     return filteredCoincidences;
   }, [completedWords]);
 
@@ -133,8 +137,6 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
       </div>
     );
   }
-
-  useEffect(() => console.log(letterClasses), [completedWords]);
 
   return (
     <div>
