@@ -1,37 +1,19 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { MemoizedKeyboard } from "../game/Keyboard";
+import { MemoizedKeyboard } from "./Keyboard";
 import { MemoPinInput } from "./PinInput/PinInput";
-import { isProper } from "./../util/dictionary";
+import { isProper } from "../util/dictionary";
 import { completedWordsType } from "./PinInput/types";
+import { filterCoincidences, initializeCompleteWords } from "../util/array";
+import { findLetterCoincidences } from "../util/array";
 
-const initializeCompleteWords = (rows) => Array(rows).fill({ text: "", coincidences: [] });
-
-const findLetterCoincidences = (array: completedWordsType[]) =>
-  array
-    .map((word) => {
-      return word.coincidences.map((e, index) => ({ [word.text[index]]: e }));
-    })
-    .flat();
-
-const filterCoincidences = (array) =>
-  array.reduce((previousValue, currentValue) => {
-    if (previousValue[Object.keys(currentValue)[0]]) {
-      if (previousValue[Object.keys(currentValue)[0]] === "semi-correct" && Object.values(currentValue)[0] === "correct") {
-        return { ...previousValue, ...currentValue };
-      }
-      return { ...previousValue };
-    }
-    return { ...previousValue, ...currentValue };
-  }, {});
-
-interface PinInputWrapperProps {
+interface GameProps {
   rows: number;
   wordSize: number;
   correctWord: string;
   handleRestart: () => void;
 }
 
-const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord, handleRestart }) => {
+const Game: FC<GameProps> = ({ rows, wordSize, correctWord, handleRestart }) => {
   const [currentWord, setCurrentWord] = useState<string[]>([] as Array<string>);
   const [completedWords, setCompletedWords] = useState<completedWordsType[]>(initializeCompleteWords(rows));
   const [won, setWon] = useState<boolean>(false);
@@ -153,4 +135,4 @@ const PinInputWrapper: FC<PinInputWrapperProps> = ({ rows, wordSize, correctWord
   );
 };
 
-export default PinInputWrapper;
+export default Game;

@@ -1,20 +1,20 @@
 import { useState } from "react";
 import "./App.css";
-import PinInputWrapper from "./Component/PinInputWrapper";
+import Game from "./Component/Game";
 import { getRandomWord } from "./util/dictionary";
+import { ROWS, WORD_LENGTH } from "./util/gameConst";
 
 function App() {
-  const [correctWord, setCorrectWord] = useState(getRandomWord());
+  const [correctWord, setCorrectWord] = useState<string>(getRandomWord());
 
-  const restartGameChangeCorrectWord = () => {
+  const changeCorrectWord = () => {
     setCorrectWord(getRandomWord());
   };
   console.log(correctWord);
 
   return (
     <div className="App">
-      <PinInputWrapper rows={6} wordSize={5} correctWord={correctWord} handleRestart={restartGameChangeCorrectWord} />
-      {/* <Field /> */}
+      <Game rows={ROWS} wordSize={WORD_LENGTH} correctWord={correctWord} handleRestart={changeCorrectWord} />
     </div>
   );
 }
