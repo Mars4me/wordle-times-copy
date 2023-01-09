@@ -1,6 +1,6 @@
 # Copy of New York Times game Wordle
 
-Preview -  [CLICK ME](https://mars4me.github.io/pin-input-component/)
+Preview -  [CLICK ME](https://mars4me.github.io/wordle-times-copy/)
 
 ## Run project
 
