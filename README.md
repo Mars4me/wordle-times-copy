@@ -2,14 +2,4 @@
 
 Preview -  [CLICK ME](https://mars4me.github.io/wordle-times-copy/)
 
-## Run project
-
-To run this project, install it locally using npm
-
-```
-$ git clone _https_ or via _SSH_
-$ npm run dev / yarn dev
-
-## License
-
-MIT © [Mars4me](https://github.com/Mars4me)
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
